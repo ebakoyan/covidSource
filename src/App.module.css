@@ -1,0 +1,16 @@
+.container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.top {
+    height: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.chart {
+    margin: 0 auto;
+    width: 80%;
+}
