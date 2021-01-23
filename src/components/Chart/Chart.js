@@ -17,6 +17,15 @@ export class Chart extends Component {
         }
         this.setState({loading: false})
     }
+    async componentWillUpdate(props) {
+        if (this.props.country !=props.country) {
+            this.setState({
+                data: await fetchCountry(props.country)
+            })
+        }
+        console.log(props)
+    }
+
     render() {
         // console.log(this.props,this.state.data)
         if (this.state.loading) {
@@ -50,15 +59,24 @@ export class Chart extends Component {
         }
         return <Line
             data={{
-            labels: this.state.data.map((date) => new Date(date.lastUpdate).toLocaleDateString()),
+            labels: this
+                .state
+                .data
+                .map((date) => new Date(date.lastUpdate).toLocaleDateString()),
             datasets: [
                 {
-                    data: this.state.data.map((data) => data.confirmed),
+                    data: this
+                        .state
+                        .data
+                        .map((data) => data.confirmed),
                     label: 'Infected',
                     borderColor: 'red',
                     fill: true
                 }, {
-                    data: this.state.data.map((data) => data.deaths),
+                    data: this
+                        .state
+                        .data
+                        .map((data) => data.deaths),
                     label: 'Deaths',
                     borderColor: 'black',
                     backgroundColor: 'black',

@@ -1,12 +1,14 @@
 import {Component} from 'react'
 import List from "./List"
+import s from './Country.module.css'
 import {fetchCountryList} from '../../api'
 
 export default class Country extends Component {
     state = {
         list: ['USA'],
         search: "",
-        loading: true
+        loading: true,
+        show:false
     }
     async componentDidMount() {
         this.setState({list: await fetchCountryList()})
@@ -23,19 +25,20 @@ export default class Country extends Component {
                 }
             })
         const changeHandler = ({target: {value}}) => {
-
             this.setState({search: value})
         }
-        if(this.state.search.length>1){
-            this.props.setCountry(countryList[0])
+        let component = [];
+        if(!this.state.loading){
+            for(let i =0;i<3;i++){
+                let a=countryList[i]
+                component.push(<List name = {a} setCountry={this.props.setCountry} key={a}/>)
+            }
         }
         return (
-            <div>
-                <input type="text" onChange={changeHandler}/>
+            <div className={s.input}>
+                <input type="text" placeholder='Search' onChange={changeHandler} onClick={()=>this.setState({show:true})}/>
                 <div>
-                    {!this.state.loading
-                        ? (countryList.map(a =><List name = {a}> </List>))
-                        : null}
+                    {this.state.show ? component :null}
                 </div>
             </div>
         )

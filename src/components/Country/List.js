@@ -1,5 +1,5 @@
-const List = ({name})=>(
-    <div>
+const List = ({name,setCountry})=>(
+    <div onClick={()=>setCountry(name)} style={{cursor:"pointer"}}>
         <h2>
             {name}
         </h2>

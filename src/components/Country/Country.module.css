@@ -1,0 +1,14 @@
+.input {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input input {
+    font-size: 20px;
+    border: none;
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    width: 400px;
+    height: 30px;
+}
